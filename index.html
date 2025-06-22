@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feliz Cumpleaños Olga - 72 años</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background:
+                linear-gradient(135deg, #ffffff4d, #ffe4e652),
+                url("img/fondo.jpg") no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .petal {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #dc143c;
+            border-radius: 50% 0 50% 0;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+
+        .petal:nth-child(odd) {
+            background: #ff6b6b;
+            transform: rotate(45deg);
+        }
+
+        .petal:nth-child(even) {
+            background: #ff8a95;
+            transform: rotate(-45deg);
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #musicToggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 2px solid #dc143c;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 999;
+            transition: background 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 5px 15px rgba(220, 20, 60, 0.25);
+        }
+
+        #musicToggle:hover {
+            background: #ffe6eb;
+            transform: scale(1.1);
+        }
+
+        .birthday-card {
+            background: rgba(255, 255, 255, 0.329);
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 60px rgba(220, 20, 60, 0.15);
+            text-align: center;
+            border: 3px solid #dc143c;
+            position: relative;
+            backdrop-filter: blur(1px);
+        }
+
+        .rose-decoration {
+            position: absolute;
+            font-size: 2rem;
+            color: #dc143c;
+            opacity: 0.8;
+        }
+
+        .rose-top-left {
+            top: -10px;
+            left: -10px;
+        }
+
+        .rose-top-right {
+            top: -10px;
+            right: -10px;
+        }
+
+        .rose-bottom-left {
+            bottom: -10px;
+            left: -10px;
+        }
+
+        .rose-bottom-right {
+            bottom: -10px;
+            right: -10px;
+        }
+
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #dc143c;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #2c3e50;
+            margin: 30px 0;
+        }
+
+        .signature {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 6rem;
+            color: #dc143c;
+            margin-top: 5px;
+        }
+
+        .heart {
+            color: #ff6b6b;
+            font-size: 1.5rem;
+            margin-left: 10px;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .love-button {
+            margin-inline: auto;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #dc143c, #ff6b6b);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(220, 20, 60, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .love-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(220, 20, 60, 0.4);
+        }
+
+        .hidden-message {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 182, 193, 0.2);
+            border-radius: 15px;
+            border: 2px solid #ffd700;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 1s ease, opacity 1s ease;
+            font-weight: 700;
+        }
+
+        .hidden-message.show {
+            opacity: 1;
+            max-height: 1000px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.8rem;
+            }
+
+            .message {
+                font-size: 1.1rem;
+                line-height: 1.6;
+            }
+
+            .signature {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2.4rem;
+            }
+
+            .message {
+                font-size: 1rem;
+            }
+
+            .signature {
+                font-size: 1.8rem;
+            }
+
+            .rose-decoration {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="petals-container" id="petalsContainer"></div>
+
+    <div class="container">
+        <button id="musicToggle" title="Música" aria-label="Activar música">
+            🎵
+        </button>
+        <audio id="bgMusic" loop>
+            <source src="music/Cumpleaños feliz con Piano y Violin, precioso.mp3" type="audio/mp3" />
+        </audio>
+
+        <div class="birthday-card">
+            <div class="rose-decoration rose-top-left"><img src="img/rosa.png" alt="" width="70"></div>
+            <div class="rose-decoration rose-top-right"><img src="img/rosa.png" alt="" width="70"></div>
+            <div class="rose-decoration rose-bottom-left"><img src="img/rosa.png" alt="" width="70"></div>
+            <div class="rose-decoration rose-bottom-right"><img src="img/rosa.png" alt="" width="70"></div>
+
+            <h1 class="title">¡Feliz cumpleaños, madrina!</h1>
+
+            <div class="message">
+                <p>Gracias por estar siempre, por tu amor, tus cuidados a todos, desde siempre.</p>
+                <p>Hoy celebramos un <strong style="color:#dc143c;">año más</strong> con alegría y muchísimo cariño.</p>
+                <p>Te quiero con el alma!</p>
+            </div>
+
+            <div class="signature">
+                — Fer (tu ahijado) <span class="heart"><img src="img/corazon.png" alt="" width="100"></span>
+            </div>
+
+            <button class="love-button" id="loveButton">Abrir mensaje <img src="img/carta.png" alt="" width="50"></button>
+
+            <div class="hidden-message" id="hiddenMessage">
+                <p><strong><i>Querida madrina,</i></strong></p>
+                <p>Cada año que pasa, tu luz brilla más fuerte. Eres un ejemplo de fortaleza y amor. Tu sonrisa ilumina
+                    nuestros días y tu cariño nos acompaña siempre.</p>
+                <p>Que este nuevo año de vida esté lleno de salud, felicidad y todos los momentos hermosos que mereces.
+                </p>
+                <p style="color: #dc143c; font-weight: 600;">¡Te amo muchísimo! y aguante RIVER!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 🌸 Generar pétalos flotantes
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.style.left = Math.random() * 100 + '%';
+            petal.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            petal.style.animationDelay = Math.random() * 2 + 's';
+            document.getElementById('petalsContainer').appendChild(petal);
+            setTimeout(() => petal.remove(), 6000);
+        }
+
+        setInterval(createPetal, 300);
+
+        // 💌 Mostrar/ocultar mensaje adicional
+        document.getElementById('loveButton').addEventListener('click', function () {
+            const hiddenMessage = document.getElementById('hiddenMessage');
+            const button = this;
+            
+            // Activar música al abrir el mensaje
+            if (!hiddenMessage.classList.contains('show') && !isPlaying) {
+                startMusic();
+            }
+            
+            hiddenMessage.classList.toggle('show');
+            button.innerHTML = hiddenMessage.classList.contains('show')
+                ? 'Cerrar mensaje <img src="img/carta.png" alt="" width="50">'
+                : 'Abrir mensaje <img src="img/carta.png" alt="" width="50">';
+        });
+
+        // 🎵 Control de música
+        const musicToggle = document.getElementById("musicToggle");
+        const bgMusic = document.getElementById("bgMusic");
+        let isPlaying = false;
+
+        // Función para iniciar música con fade-in
+        function startMusic() {
+            bgMusic.volume = 0.3; // Volumen normal
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                musicToggle.textContent = "🔇";
+            }).catch((err) => {
+                console.log("Error al reproducir música:", err);
+            });
+        }
+
+        // Función para pausar música
+        function stopMusic() {
+            bgMusic.pause();
+            isPlaying = false;
+            musicToggle.textContent = "🎵";
+        }
+
+        // Event listener para el botón de música
+        musicToggle.addEventListener("click", () => {
+            if (isPlaying) {
+                stopMusic();
+            } else {
+                startMusic();
+            }
+        });
+
+        // 🎼 Autoplay removido - la música se activa desde el botón del mensaje
+        // Los event listeners de autoplay ya no son necesarios
+    </script>
+
+</body>
+
+</html>
